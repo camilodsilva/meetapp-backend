@@ -5,9 +5,11 @@ import multerConfig from './config/multer';
 import BannerController from './app/controllers/BannerController';
 import MeetupController from './app/controllers/MeetupController';
 import SessionController from './app/controllers/SessionController';
+import SubscriptionController from './app/controllers/SubscriptionController';
 import UserController from './app/controllers/UserController';
 
 import MeetupValidation from './app/middlewares/MeetupValidation';
+import SubscriptionValidation from './app/middlewares/SubscriptionValidation';
 import UserValidation from './app/middlewares/UserValidation';
 
 import authMiddleware from './app/middlewares/auth';
@@ -38,6 +40,15 @@ routes.delete(
   '/meetups/:id',
   MeetupValidation.meetupOwnerValidation,
   MeetupController.delete
+);
+
+routes.post(
+  '/subscriptions',
+  SubscriptionValidation.userIsGuestValidation,
+  SubscriptionValidation.pastDateValidation,
+  SubscriptionValidation.twiceSubscriptionValidation,
+  SubscriptionValidation.sameTimeValidation,
+  SubscriptionController.store
 );
 
 routes.post('/banners', upload.single('file'), BannerController.store);

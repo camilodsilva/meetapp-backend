@@ -52,7 +52,7 @@ class MeetupController {
   }
 
   async delete(req, res) {
-    const meetup = await Meetup.destroy({
+    await Meetup.destroy({
       where: {
         id: req.params.id,
       },

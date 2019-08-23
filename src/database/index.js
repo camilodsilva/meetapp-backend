@@ -2,11 +2,12 @@ import Sequelize from 'sequelize';
 
 import Banner from '../app/models/Banner';
 import Meetup from '../app/models/Meetup';
+import Subscription from '../app/models/Subscription';
 import User from '../app/models/User';
 
 import databaseConfig from '../config/database';
 
-const models = [User, Banner, Meetup];
+const models = [User, Banner, Meetup, Subscription];
 
 class Database {
   constructor() {
