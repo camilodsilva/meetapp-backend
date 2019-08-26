@@ -1,19 +1,35 @@
-import Meetup from '../models/Meetup';
+import { Op } from 'sequelize';
+import { startOfDay, endOfDay } from 'date-fns';
+
 import Banner from '../models/Banner';
+import Meetup from '../models/Meetup';
+import User from '../models/User';
 
 class MeetupController {
   async index(req, res) {
+    const { date, page = 1 } = req.query;
+    const searchDate = new Date(date);
+
     const meetups = await Meetup.findAll({
       where: {
-        user_id: req.userId,
+        date: {
+          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
+        },
       },
       attributes: ['title', 'description', 'location', 'date'],
+      limit: 10,
+      offset: (page - 1) * 10,
       order: ['date'],
       include: [
         {
           model: Banner,
           as: 'banner',
           attributes: ['name', 'path', 'url'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name', 'email'],
         },
       ],
     });

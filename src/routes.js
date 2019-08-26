@@ -42,12 +42,13 @@ routes.delete(
   MeetupController.delete
 );
 
+routes.get('/subscriptions', SubscriptionController.index);
 routes.post(
   '/subscriptions',
-  // SubscriptionValidation.userIsGuestValidation,
-  // SubscriptionValidation.pastDateValidation,
-  // SubscriptionValidation.twiceSubscriptionValidation,
-  // SubscriptionValidation.sameTimeValidation,
+  SubscriptionValidation.userIsGuestValidation,
+  SubscriptionValidation.pastDateValidation,
+  SubscriptionValidation.twiceSubscriptionValidation,
+  SubscriptionValidation.sameTimeValidation,
   SubscriptionController.store
 );
 
