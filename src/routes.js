@@ -44,10 +44,10 @@ routes.delete(
 
 routes.post(
   '/subscriptions',
-  SubscriptionValidation.userIsGuestValidation,
-  SubscriptionValidation.pastDateValidation,
-  SubscriptionValidation.twiceSubscriptionValidation,
-  SubscriptionValidation.sameTimeValidation,
+  // SubscriptionValidation.userIsGuestValidation,
+  // SubscriptionValidation.pastDateValidation,
+  // SubscriptionValidation.twiceSubscriptionValidation,
+  // SubscriptionValidation.sameTimeValidation,
   SubscriptionController.store
 );
 
